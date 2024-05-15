@@ -17,6 +17,9 @@ import {
   DialogActions,
 } from "@mui/material";
 import { Delete as DeleteIcon, Edit as EditIcon, Add as AddIcon } from "@mui/icons-material";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import { useSession } from "./SessionContext";
+import { useNavigate } from "react-router-dom";
 
 const Admin = () => {
   const [usuarios, setUsuarios] = useState([]);
@@ -24,6 +27,16 @@ const Admin = () => {
   const [openEditarDialog, setOpenEditarDialog] = useState(false);
   const [nuevoUsuario, setNuevoUsuario] = useState({ username: "", password: "" });
   const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(null);
+  const { signOut, user } = useSession();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user || user != "admin") {
+      // Si no hay usuario, redirige al usuario a la página de inicio de sesión
+      navigate("/");
+    }
+  }, [user, navigate]);
 
   useEffect(() => {
     obtenerUsuarios();
@@ -97,6 +110,9 @@ const Admin = () => {
         sx={{ float: "right", mb: 2 }}
       >
         Agregar Usuario
+      </Button>
+      <Button variant="contained" color="primary" onClick={signOut} endIcon={<ExitToAppIcon />}>
+        Cerrar Sesión
       </Button>
       <TableContainer component={Paper}>
         <Table>

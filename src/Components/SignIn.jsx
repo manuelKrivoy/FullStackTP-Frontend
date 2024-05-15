@@ -8,12 +8,14 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+
+import { useSession } from "./SessionContext";
 
 const defaultTheme = createTheme();
 
 export default function SignIn() {
   const navigate = useNavigate();
+  const { signIn } = useSession();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -22,10 +24,11 @@ export default function SignIn() {
     const password = data.get("password");
 
     try {
-      const response = await axios.post("http://localhost:3001/api/auth", { username: user, password: password });
-      if (response.data.role === "admin") {
+      if (user === "admin") {
+        await signIn(user, password);
         navigate("/admin");
       } else {
+        await signIn(user, password);
         navigate("/panel");
       }
     } catch (error) {
