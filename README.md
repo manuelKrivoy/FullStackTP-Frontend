@@ -1,4 +1,4 @@
-### Backend del Proyecto
+### Frontend del Proyecto
 
 Este es el frontend del proyecto, el cual está desarrollado utilizando React.
 
@@ -31,3 +31,7 @@ Este es el frontend del proyecto, el cual está desarrollado utilizando React.
 ### Documentación del proyecto (Descripción/Endpoints/Tecnologías)
 
 Puedes descargar la documentación [aquí](https://drive.google.com/file/d/1kFCDNeKZmOXzWSPUNZSrPri7jEVMkaBH/view?usp=drive_link).
+
+### Repositorio Backend
+
+[Backend](https://github.com/manuelKrivoy/FullStackTp-Backend)
